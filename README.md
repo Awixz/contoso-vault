@@ -28,5 +28,6 @@ Do these once, in Session 01:
 | --------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `01-first-encrypted-message/`                 | Session 01 | Keep your `shift.py` from class. Upload the lab to the LMS as one document.                                                                                                                                        |
 | `02-finishing-the-caesar-cipher/`              | Session 02 | Check `shift.py` against the take-home test plan. |
+| `03-caesar-functions/`                         | Session 04 | Build `caesar.py` and `letters.py`, and check them against the take-home test plan. |
 
 The folder for each later session arrives here before that session starts.
