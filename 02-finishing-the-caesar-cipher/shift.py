@@ -1,19 +1,47 @@
-ALPHABET_SIZE = 26
 
-message: str = input("Message: ")  # "AB$78"
+ALPHABET_SIZE: int = 26
+
+message: str = input("Message: ")
 key: int = int(input("Key: "))
 
-ciphertext = ""
+# Encryption
+ciphertext: str = ""
 
-# What if the message had symbols to begin with?
-# What if the message has lowercase letters?
-
-for letter in message:  # "VWX"
-    if "A" <= letter <= "Z":
-        shifted = ord(letter) + key  # 89
-        shifted = (shifted - ord("A")) % ALPHABET_SIZE + ord("A")
+for character in message:
+    if "A" <= character <= "Z":
+        shifted: int = ord(character) + key
+        shifted = ord("A") + (shifted - ord("A")) % ALPHABET_SIZE
         ciphertext += chr(shifted)
-    else:
-        ciphertext += letter
 
-print(ciphertext)
+    elif "a" <= character <= "z":
+        shifted = ord(character) + key
+        shifted = ord("a") + (shifted - ord("a")) % ALPHABET_SIZE
+        ciphertext += chr(shifted)
+
+    else:
+        ciphertext += character
+
+print("Ciphertext:", ciphertext)
+
+
+# Decryption
+plaintext: str = ""
+
+for character in ciphertext:
+    if "A" <= character <= "Z":
+        shifted = ord(character) - key
+        shifted = ord("A") + (shifted - ord("A")) % ALPHABET_SIZE
+        plaintext += chr(shifted)
+
+    elif "a" <= character <= "z":
+        shifted = ord(character) - key
+        shifted = ord("a") + (shifted - ord("a")) % ALPHABET_SIZE
+        plaintext += chr(shifted)
+
+    else:
+        plaintext += character
+
+print("Plaintext:", plaintext)
+
+# Check the round trip
+assert plaintext == message
