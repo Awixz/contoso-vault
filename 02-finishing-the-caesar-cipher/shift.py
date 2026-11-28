@@ -4,18 +4,27 @@ ALPHABET_SIZE: int = 26
 message: str = input("Message: ")
 key: int = int(input("Key: "))
 
-# Encryption
 ciphertext: str = ""
 
+character: str
+shifted: int
+
+# Encryption
 for character in message:
     if "A" <= character <= "Z":
-        shifted: int = ord(character) + key
-        shifted = ord("A") + (shifted - ord("A")) % ALPHABET_SIZE
+        shifted = ord(character) + key
+
+        if shifted > ord("Z"):
+            shifted -= ALPHABET_SIZE
+
         ciphertext += chr(shifted)
 
     elif "a" <= character <= "z":
         shifted = ord(character) + key
-        shifted = ord("a") + (shifted - ord("a")) % ALPHABET_SIZE
+
+        if shifted > ord("z"):
+            shifted -= ALPHABET_SIZE
+
         ciphertext += chr(shifted)
 
     else:
@@ -30,12 +39,18 @@ plaintext: str = ""
 for character in ciphertext:
     if "A" <= character <= "Z":
         shifted = ord(character) - key
-        shifted = ord("A") + (shifted - ord("A")) % ALPHABET_SIZE
+
+        if shifted < ord("A"):
+            shifted += ALPHABET_SIZE
+
         plaintext += chr(shifted)
 
     elif "a" <= character <= "z":
         shifted = ord(character) - key
-        shifted = ord("a") + (shifted - ord("a")) % ALPHABET_SIZE
+
+        if shifted < ord("a"):
+            shifted += ALPHABET_SIZE
+
         plaintext += chr(shifted)
 
     else:
@@ -43,5 +58,4 @@ for character in ciphertext:
 
 print("Plaintext:", plaintext)
 
-# Check the round trip
 assert plaintext == message
